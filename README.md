@@ -8,7 +8,7 @@ This extension only works when a workspace/folder is opened.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+-
 
 ## Release Notes
 
