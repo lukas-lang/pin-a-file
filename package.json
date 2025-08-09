@@ -3,6 +3,9 @@
   "displayName": "File Selector",
   "description": "Adds the ability to mark a file in a workspace as selected to enable quickly setting e.g. a launch target in a debug configuration.",
   "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/lukas-lang/file-selector"
+  },
   "engines": {
     "vscode": "^1.102.0"
   },
