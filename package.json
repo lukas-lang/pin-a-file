@@ -2,6 +2,7 @@
   "name": "pin-a-file",
   "displayName": "Pin a file",
   "description": "Adds the ability to mark a file in a workspace as \"pinned\" to enable quickly setting e.g. a launch target in a debug configuration.",
+  "icon": "icon.png",
   "version": "0.0.1",
   "publisher": "LukasLang",
   "repository": {
