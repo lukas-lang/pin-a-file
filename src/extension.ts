@@ -4,15 +4,15 @@ import * as path from 'path';
 
 let statusBarItem: vscode.StatusBarItem;
 
-const FILE_SELECTOR_FILE = 'fileSelector.json';
+const PIN_A_FILE_SETTINGS_FILE = 'pinFile.json';
 
 export function activate(context: vscode.ExtensionContext) {
-    const getFileCmd = vscode.commands.registerCommand('fileSelector.selectedFile', () => {
-        return getSelectedFile() || '';
+    const getFileCmd = vscode.commands.registerCommand('pinFile.pinnedFile', () => {
+        return getPinnedFile() || '';
     });
     context.subscriptions.push(getFileCmd);
 
-    const changeFileCmd = vscode.commands.registerCommand('fileSelector.changeSelectedFile', async () => {
+    const changeFileCmd = vscode.commands.registerCommand('pinFile.changePinnedFile', async () => {
         if (!getSettingsFilePath()) {
             vscode.window.showErrorMessage('No workspace is open. Please open a folder or workspace first.');
             return;
@@ -20,17 +20,17 @@ export function activate(context: vscode.ExtensionContext) {
 
         const selected = await vscode.window.showOpenDialog({
             canSelectMany: false,
-            openLabel: 'Select file'
+            openLabel: 'Select file to pin'
         });
         if (selected && selected.length > 0) {
-            await saveSelectedFile(selected[0].fsPath);
+            await savePinnedFile(selected[0].fsPath);
             updateStatusBar();
         }
     });
     context.subscriptions.push(changeFileCmd);
 
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
-    statusBarItem.command = 'fileSelector.changeSelectedFile';
+    statusBarItem.command = 'pinFile.changePinnedFile';
     context.subscriptions.push(statusBarItem);
 
     updateStatusBar();
@@ -43,10 +43,10 @@ function getSettingsFilePath(): string | undefined {
     const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
     const vscodeDir = path.join(workspaceRoot, '.vscode');
 
-    return path.join(vscodeDir, FILE_SELECTOR_FILE);
+    return path.join(vscodeDir, PIN_A_FILE_SETTINGS_FILE);
 }
 
-function getSelectedFile(): string | undefined {
+function getPinnedFile(): string | undefined {
     const settingsPath = getSettingsFilePath();
     if (!settingsPath || !fs.existsSync(settingsPath)) {
         return undefined;
@@ -54,7 +54,7 @@ function getSelectedFile(): string | undefined {
     try {
         const data = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
 
-        let file = data.selectedFile;
+        let file = data.pinnedFile;
 
         if (file && file.startsWith('${workspaceFolder}')) {
             const wsPath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
@@ -69,7 +69,7 @@ function getSelectedFile(): string | undefined {
     }
 }
 
-async function saveSelectedFile(filePath: string) {
+async function savePinnedFile(filePath: string) {
     const settingsPath = getSettingsFilePath();
     if (!settingsPath) { return; }
     fs.mkdirSync(path.dirname(settingsPath));
@@ -84,20 +84,20 @@ async function saveSelectedFile(filePath: string) {
         }
     }
 
-    fs.writeFileSync(settingsPath, JSON.stringify({ selectedFile: storedPath }, null, 2), 'utf8');
+    fs.writeFileSync(settingsPath, JSON.stringify({ pinnedFile: storedPath }, null, 2), 'utf8');
 }
 
 function updateStatusBar() {
     if (!getSettingsFilePath()) {
-        statusBarItem.text = "$(file) No workspace opened";
+        statusBarItem.text = "$(timeline-pin) No workspace opened";
     }
     else {
-        const file = getSelectedFile();
+        const file = getPinnedFile();
         if (file) {
-            statusBarItem.text = `$(file) ${path.basename(file)}`;
-            statusBarItem.tooltip = `Selected file: ${file}`;
+            statusBarItem.text = `$(timeline-unpin) ${path.basename(file)}`;
+            statusBarItem.tooltip = `Pinned file: ${file}`;
         } else {
-            statusBarItem.text = `$(file) No file selected`;
+            statusBarItem.text = `$(timeline-pin) No file pinned`;
         }
     }
 

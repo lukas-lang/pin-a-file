@@ -1,10 +1,11 @@
 {
-  "name": "file-selector",
-  "displayName": "File Selector",
-  "description": "Adds the ability to mark a file in a workspace as selected to enable quickly setting e.g. a launch target in a debug configuration.",
+  "name": "pin-a-file",
+  "displayName": "Pin a file",
+  "description": "Adds the ability to mark a file in a workspace as \"pinned\" to enable quickly setting e.g. a launch target in a debug configuration.",
   "version": "0.0.1",
+  "publisher": "LukasLang",
   "repository": {
-    "url": "https://github.com/lukas-lang/file-selector"
+    "url": "https://github.com/lukas-lang/pin-a-file"
   },
   "engines": {
     "vscode": "^1.102.0"
@@ -19,12 +20,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "fileSelector.changeSelectedFile",
-        "title": "Change Selected File"
+        "command": "pinFile.changePinnedFile",
+        "title": "Change Pinned File"
       },
       {
-        "command": "fileSelector.selectedFile",
-        "title": "Get Selected File (for variables)"
+        "command": "pinFile.pinnedFile",
+        "title": "Get Pinned File (for variables)"
       }
     ]
   },
