@@ -9,13 +9,19 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "file-selector.helloWorld",
-        "title": "Hello World"
+        "command": "fileSelector.changeSelectedFile",
+        "title": "Change Selected File"
+      },
+      {
+        "command": "fileSelector.selectedFile",
+        "title": "Get Selected File (for variables)"
       }
     ]
   },
