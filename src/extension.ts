@@ -72,7 +72,10 @@ function getPinnedFile(): string | undefined {
 async function savePinnedFile(filePath: string) {
     const settingsPath = getSettingsFilePath();
     if (!settingsPath) { return; }
-    fs.mkdirSync(path.dirname(settingsPath));
+
+    if (!fs.existsSync(path.dirname(settingsPath))) {
+        fs.mkdirSync(path.dirname(settingsPath));
+    }
 
     let storedPath = filePath;
 
