@@ -3,7 +3,7 @@
   "displayName": "Pin a file",
   "description": "Adds the ability to mark a file in a workspace as \"pinned\" to enable quickly setting e.g. a launch target in a debug configuration.",
   "icon": "icon.png",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "LukasLang",
   "repository": {
     "url": "https://github.com/lukas-lang/pin-a-file"
@@ -26,7 +26,27 @@
       },
       {
         "command": "pinFile.pinnedFile",
-        "title": "Get Pinned File (for variables)"
+        "title": "Get the full absolute path to pinned file (for variables)"
+      },
+      {
+        "command": "pinFile.pinnedFileBasenameNoExtension",
+        "title": "Get the name of the pinned file without extension (for variables)"
+      },
+      {
+        "command": "pinFile.pinnedFileBasename",
+        "title": "Get the name of the pinned file (for variables)"
+      },
+      {
+        "command": "pinFile.pinnedFileDirnameBasename",
+        "title": "Get the name of the directory containing the pinned file (for variables)"
+      },
+      {
+        "command": "pinFile.pinnedFileDirname",
+        "title": "Get the path of the directory containing the pinned file (for variables)"
+      },
+      {
+        "command": "pinFile.pinnedFileExtname",
+        "title": "Get the extension of the pinned file (for variables)"
       }
     ]
   },

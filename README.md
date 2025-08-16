@@ -12,6 +12,8 @@ This extension only works when a workspace/folder is opened.
 
 ## Release Notes
 
+### 0.1.0
+Add `pinnedFileBasenameNoExtension`, `pinnedFileBasename`, `pinnedFileDirnameBasename`, `pinnedFileDirname`, `pinnedFileExtname` commands to align with `${file}` variants.
 ### 0.0.1
 Initial release
 

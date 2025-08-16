@@ -11,6 +11,26 @@ export function activate(context: vscode.ExtensionContext) {
         return getPinnedFile() || '';
     });
     context.subscriptions.push(getFileCmd);
+    const getFileBasenameNoExtensionCmd = vscode.commands.registerCommand('pinFile.pinnedFileBasenameNoExtension', () => {
+        return path.parse(getPinnedFile() || '').name;
+    });
+    context.subscriptions.push(getFileBasenameNoExtensionCmd);
+    const getFileBasenameCmd = vscode.commands.registerCommand('pinFile.pinnedFileBasename', () => {
+        return path.parse(getPinnedFile() || '').base;
+    });
+    context.subscriptions.push(getFileBasenameCmd);
+    const getFileDirnameBasenameCmd = vscode.commands.registerCommand('pinFile.pinnedFileDirnameBasename', () => {
+        return path.basename(path.parse(getPinnedFile() || '').dir);
+    });
+    context.subscriptions.push(getFileDirnameBasenameCmd);
+    const getFileDirnameCmd = vscode.commands.registerCommand('pinFile.pinnedFileDirname', () => {
+        return path.parse(getPinnedFile() || '').dir;
+    });
+    context.subscriptions.push(getFileDirnameCmd);
+    const getFileExtnameCmd = vscode.commands.registerCommand('pinFile.pinnedFileExtname', () => {
+        return path.parse(getPinnedFile() || '').ext;
+    });
+    context.subscriptions.push(getFileExtnameCmd);
 
     const changeFileCmd = vscode.commands.registerCommand('pinFile.changePinnedFile', async () => {
         if (!getSettingsFilePath()) {
